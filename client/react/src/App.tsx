@@ -1,10 +1,12 @@
 import "./App.css";
 import { NavBar } from "./components/NavBar";
 import "./index.css";
+import Landing from "./views/Landing/Landing";
 function App() {
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
+      <Landing />
     </div>
   );
 }
