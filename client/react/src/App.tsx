@@ -5,7 +5,7 @@ import Landing from "./views/Landing/Landing";
 function App() {
   return (
     <div>
-      {/* <NavBar /> */}
+      <NavBar />
       <Landing />
     </div>
   );
