@@ -1,6 +1,6 @@
-import './App.css';
-import { NavBar } from './components/NavBar';
-import './index.css';
+import "./App.css";
+import { NavBar } from "./components/NavBar";
+import "./index.css";
 function App() {
   return (
     <div>
@@ -10,4 +10,3 @@ function App() {
 }
 
 export default App;
-
