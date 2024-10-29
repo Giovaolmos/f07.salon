@@ -1,24 +1,35 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
-import { User } from "./User"
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { User } from "./User";
+import { Hairdresser } from "./Hairdressers";
 
-@Entity({name:"appointments"})
+@Entity({ name: "appointments" })
 export class Appointment {
-    @PrimaryGeneratedColumn()
-    id: number
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    date: Date
+  @Column()
+  date: Date;
 
-    @Column()
-    description:string
+  @Column()
+  description: string;
 
-    @Column()
-    time: string
+  @Column()
+  time: string;
 
-    @Column({default: "Active"})
-    status:string
+  @Column({ default: "Active" })
+  status: string;
 
-    @ManyToOne(() => User, (user) => user.appointments)
-    @JoinColumn()
-    user: User
+  @ManyToOne(() => User, (user) => user.appointments)
+  @JoinColumn()
+  user: User;
+
+  @ManyToOne(() => Hairdresser, (hairdresser) => hairdresser.appointments)
+  @JoinColumn()
+  hairdresser: Hairdresser;
 }

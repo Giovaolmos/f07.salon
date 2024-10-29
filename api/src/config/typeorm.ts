@@ -2,6 +2,7 @@ import { DataSource } from "typeorm";
 import { User } from "../entities/User";
 import { Appointment } from "../entities/Appointment";
 import { Credential } from "../entities/Credential";
+import { Hairdresser } from "../entities/Hairdressers";
 import {
   DB_DATABASENAME,
   DB_HOST,
@@ -20,7 +21,7 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   dropSchema: false,
   // logging: true,
-  entities: [User, Appointment, Credential],
+  entities: [User, Appointment, Credential, Hairdresser],
   subscribers: [],
   migrations: [],
 });
@@ -28,3 +29,4 @@ export const AppDataSource = new DataSource({
 export const userModel = AppDataSource.getRepository(User);
 export const appointmentModel = AppDataSource.getRepository(Appointment);
 export const credentialModel = AppDataSource.getRepository(Credential);
+export const hairdresserModel = AppDataSource.getRepository(Hairdresser);
