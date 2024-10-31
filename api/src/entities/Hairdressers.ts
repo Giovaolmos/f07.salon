@@ -1,5 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
 import { Appointment } from "./Appointment";
+import { Credential } from "./Credential";
 
 @Entity({ name: "hairdressers" })
 export class Hairdresser {
@@ -14,6 +22,10 @@ export class Hairdresser {
 
   @Column()
   price: number;
+
+  @OneToOne(() => Credential)
+  @JoinColumn()
+  credentials: Credential;
 
   @OneToMany(() => Appointment, (appointment) => appointment.hairdresser)
   appointments: Appointment[];

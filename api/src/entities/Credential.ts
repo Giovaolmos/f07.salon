@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { User } from "./User";
+import { Hairdresser } from "./Hairdressers";
 
 @Entity({
   name: "credentials",
@@ -21,6 +22,8 @@ export class Credential {
   password: string;
 
   @OneToOne(() => User)
-  @JoinColumn()
   user: User;
+
+  @OneToOne(() => Hairdresser)
+  hairdresser: Hairdresser;
 }
