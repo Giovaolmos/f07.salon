@@ -6,7 +6,7 @@ export const NavBar: React.FC = () => {
   return (
     <div>
       <header>
-        <nav className="flex items-center justify-between p-4 text-white">
+        <nav className="flex items-center justify-between p-4 bg-transparent text-white relative z-10">
           <img className="rounded-full h-12 w-12" src="logo.jpeg" alt="logo" />
           <div className="hidden lg:flex ml-auto">
             <ul className="flex gap-4 items-center cursor-pointer">
@@ -14,10 +14,10 @@ export const NavBar: React.FC = () => {
               <li>Historial</li>
               <li>Nuevo Turno</li>
               <li>Home</li>
-              <li className="rounded-md bg-[#b37d44] py-1 px-2 text-white hover:bg-[#dc9c57]">
+              <li className="rounded-md bg-[#b37d44] py-1 px-2 hover:bg-[#dc9c57]">
                 Iniciar Sesión
               </li>
-              <li className="rounded-md bg-[#b56d24] py-1 px-2 text-white hover:bg-[#d68432]">
+              <li className="rounded-md bg-[#de8730] py-1 px-2 hover:bg-[#f29435]">
                 Registrar
               </li>
             </ul>
@@ -38,10 +38,10 @@ export const NavBar: React.FC = () => {
             <li>Historial</li>
             <li>Nuevo Turno</li>
             <li>Home</li>
-            <li className="rounded-md bg-[#FFD700] py-1 px-2 text-white hover:bg-[#FFDA77]">
+            <li className="rounded-md bg-[#FFD700] py-1 px-2 hover:bg-[#FFDA77]">
               Iniciar Sesión
             </li>
-            <li className="rounded-md bg-[#FFD700] py-1 px-2 text-white hover:bg-[#FFDA77]">
+            <li className="rounded-md bg-[#FFD700] py-1 px-2 hover:bg-[#FFDA77]">
               Registrar
             </li>
           </ul>

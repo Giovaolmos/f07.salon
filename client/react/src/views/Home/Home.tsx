@@ -6,13 +6,13 @@ const Home = () => {
       className="min-h-screen bg-cover bg-center p-6 sm:p-8"
       style={{ backgroundImage: `url('/bgimage.jpg')` }}
     >
-      <h1 className="text-5xl text-[#d0aa7f] font-bebas text-center mb-6 sm:mb-8">
-        ¡Bienvenido a F07 SALON!
+      <h1 className="text-7xl text-[#e7973c] font-bebas text-center mb-6 sm:mb-8">
+        Bienvenido a <b className="text-white">F07 SALON</b>{" "}
       </h1>
-      <h2 className="text-center text-[#BC8F5A] mb-10 mt-24">
-        NUESTROS BARBEROS
+      <h2 className="text-center text-[#e7973c] font-bebas mb-10 mt-24 text-6xl">
+        NUESTROS BARBEROS:
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+      <div className="grid grid-cols-3 sm:grid-cols-1 lg:grid-cols-3 gap-6 justify-items-center">
         {Peluqueros.map((peluquero, index) => (
           <div
             key={index}
@@ -27,7 +27,7 @@ const Home = () => {
               {peluquero.name}
             </h2>
             <p className="text-white">Precio: ${peluquero.price}</p>
-            <button className="bg-[#BC8F5A] rounded-md py-1 px-2 text-white hover:bg-[#FFDA77] mt-4">
+            <button className="bg-[#BC8F5A] rounded-md py-1 px-2 text-white hover:bg-[#e5ae6f] mt-4">
               Sacar Turno
             </button>
           </div>
