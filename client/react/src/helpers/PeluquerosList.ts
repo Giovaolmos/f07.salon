@@ -1,17 +1,17 @@
 export const Peluqueros = [
   {
     name: "Francisco Martín",
-    imagen: "/pancho.png", // Ruta desde public/
+    imagen: "/pancho.png",
     price: "6.000",
   },
   {
     name: "Santiago Morales",
-    imagen: "/santi.webp", // Ruta desde public/
+    imagen: "/santi.webp",
     price: "6.000",
   },
   {
     name: "Francisco Lopez",
-    imagen: "/fran.jpg", // Ruta desde public/
+    imagen: "/fran.jpg",
     price: "6.000",
   },
 ];
