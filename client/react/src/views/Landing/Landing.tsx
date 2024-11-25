@@ -12,7 +12,7 @@ const LandingPage: React.FC = () => {
         muted
         playsInline
       />
-      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full text-white text-center bg-black bg-opacity-50 px-4">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full text-white text-center bg-black bg-opacity-60 px-4">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
           Bienvenido a F07 Salon
         </h1>
@@ -20,7 +20,7 @@ const LandingPage: React.FC = () => {
           Descubre nuestros servicios
         </p>
         <Link to="/home">
-          <button className="px-6 py-3 text-lg font-semibold bg-white text-black rounded-md hover:bg-gray-200 transition duration-300">
+          <button className="px-6 py-3 text-lg font-semibold bg-yellow-900  text-white rounded-md hover:bg-yellow-800  transition duration-300">
             ¡Quiero mi turno!
           </button>
         </Link>
