@@ -25,7 +25,7 @@ export const NavBar: React.FC = () => {
         <li className="lg:mb-0 mb-2">
           <Link
             to="/iniciar-sesion"
-            className="rounded-md bg-teal-600 px-4 py-2 text-white transition hover:bg-teal-500 inline-block"
+            className="rounded-md bg-yellow-900 px-4 py-2 text-white transition hover:bg-yellow-800 inline-block"
           >
             Iniciar Sesión
           </Link>
@@ -33,7 +33,7 @@ export const NavBar: React.FC = () => {
         <li>
           <Link
             to="/registrar"
-            className="rounded-md px-4 py-2 text-white bg-sky-500/80 hover:bg-sky-400/80 inline-block"
+            className="rounded-md px-4 py-2 text-white bg-yellow-900 hover:bg-yellow-800 inline-block"
           >
             Registrar
           </Link>
@@ -45,8 +45,6 @@ export const NavBar: React.FC = () => {
   return (
     <div>
       <header className="fixed top-0 w-full bg-opacity-90 z-50 h-16">
-        {" "}
-        {/* Añade h-16 para altura fija */}
         <nav className="flex items-center p-4">
           <img className="rounded-full size-12" src="logo.jpeg" alt="logo" />
           <div className="hidden lg:flex ml-auto">
