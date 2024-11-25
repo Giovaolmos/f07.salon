@@ -62,6 +62,12 @@ export const NavBar: React.FC = () => {
           </button>
         </nav>
       </header>
+
+      {isMenuOpen && (
+        <div className="lg:hidden text-white p-4">
+          <ul className="flex flex-col gap-2">{renderNavItems()}</ul>
+        </div>
+      )}
     </div>
   );
 };
