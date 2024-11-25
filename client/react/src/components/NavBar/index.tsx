@@ -44,8 +44,10 @@ export const NavBar: React.FC = () => {
 
   return (
     <div>
-      <header>
-        <nav className="flex items-center p-4 bg-slate-800">
+      <header className="fixed top-0 w-full bg-opacity-90 z-50 h-16">
+        {" "}
+        {/* Añade h-16 para altura fija */}
+        <nav className="flex items-center p-4">
           <img className="rounded-full size-12" src="logo.jpeg" alt="logo" />
           <div className="hidden lg:flex ml-auto">
             <ul className="flex gap-4 items-center cursor-pointer">
@@ -60,12 +62,6 @@ export const NavBar: React.FC = () => {
           </button>
         </nav>
       </header>
-
-      {isMenuOpen && (
-        <div className="lg:hidden bg-slate-800 text-white p-4">
-          <ul className="flex flex-col gap-2">{renderNavItems()}</ul>
-        </div>
-      )}
     </div>
   );
 };

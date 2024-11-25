@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background-color: #3e2c1c; /* Color de fondo base marrón oscuro */
+  color: #fff; /* Color del texto */
+  font-family: "Arial", sans-serif;
+  text-align: center;
+}
