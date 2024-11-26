@@ -20,8 +20,10 @@ const Home = () => {
               alt={peluquero.name}
               className="w-24 h-24 rounded-full object-cover mb-4"
             />
-
             <p className="text-white">Precio: ${peluquero.price}</p>
+            <button className="mt-4 bg-amber-500 hover:bg-amber-400 text-white font-bold py-2 px-4 rounded">
+              Sacar Turno
+            </button>
           </div>
         ))}
       </div>
