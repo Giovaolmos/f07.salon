@@ -44,7 +44,7 @@ export const NavBar: React.FC = () => {
 
   return (
     <div>
-      <header className="fixed top-0 w-full bg-opacity-90 z-50 h-16">
+      <header className="top-0 w-full bg-opacity-90 z-50 h-16">
         <nav className="flex items-center p-4">
           <img className="rounded-full size-12" src="logo.jpeg" alt="logo" />
           <div className="hidden lg:flex ml-auto">

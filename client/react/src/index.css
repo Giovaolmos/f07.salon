@@ -3,10 +3,9 @@
 @tailwind utilities;
 
 body {
-  position: relative;
+  background-image: url("/bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   min-height: 100vh;
-  background-color: #3e2c1c;
-  color: #fff;
-  font-family: "Arial", sans-serif;
-  text-align: center;
 }
