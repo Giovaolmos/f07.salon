@@ -40,8 +40,14 @@ export const registerUserController = async (req: Request, res: Response) => {
       password,
     });
     res.status(201).json(newUser);
-  } catch (error) {
-    res.status(400).json(`Incorrect data when creating the user. ${error}`);
+  } catch (error: any) {
+    if (
+      error.message ===
+      "This email is already registered to an existing account"
+    ) {
+      return res.status(409).json({ error: error.message });
+    }
+    res.status(400).json(`Error al crear el usuario: ${error.message}`);
   }
 };
 

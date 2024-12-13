@@ -27,12 +27,21 @@ export const getUserByIdService = async (id: number): Promise<User | null> => {
 };
 
 export const registerUserService = async (userData: userDto) => {
+  const existingUser = await userModel.findOne({
+    where: { email: userData.email },
+  });
+
+  if (existingUser) {
+    throw new Error("This email is already registered to an existing account");
+  }
+
   const newUser: User = await userModel.create(userData);
 
   const newCredential: Credential = await createCredentialService({
     username: userData.username,
     password: userData.password,
   });
+
   newUser.credentials = newCredential;
   const result = await userModel.save(newUser);
   return result;
