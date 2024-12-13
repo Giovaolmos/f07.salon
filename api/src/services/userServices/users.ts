@@ -1,22 +1,22 @@
-import { FindOneOptions } from 'typeorm';
-import { userModel } from '../../config/typeorm';
-import { User } from '../../entities/User';
-import { createCredentialService } from '../credentialsServices/credentials';
-import { userDto } from '../../dtos/userDto';
-import { Credential } from '../../entities/Credential';
+import { FindOneOptions } from "typeorm";
+import { userModel } from "../../config/typeorm";
+import { User } from "../../entities/User";
+import { createCredentialService } from "../credentialsServices/credentials";
+import { userDto } from "../../dtos/userDto";
+import { Credential } from "../../entities/Credential";
 
 export const getAllUsersService = async (): Promise<User[]> => {
   const users: User[] = await userModel.find({
     relations: { appointments: true },
   });
-  if (users.length === 0) throw new Error('No users found');
+  if (users.length === 0) throw new Error("No users found in the database");
   else return users;
 };
 
 export const getUserByIdService = async (id: number): Promise<User | null> => {
   const options: FindOneOptions<User> = {
     where: { id },
-    relations: ['appointments'],
+    relations: ["appointments"],
   };
 
   const user = await userModel.findOne(options);
