@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   getAllHairdressersController,
   getHairdresserByIdController,
+  loginHairdresserController,
   registerHairdresserController,
 } from "../controllers/hairdressersController";
 import { registerHairdresserMiddleware } from "../middlewares/hairdressersMiddlewares";
@@ -17,3 +18,5 @@ hairdressersRouter.post(
   registerHairdresserMiddleware,
   registerHairdresserController,
 );
+
+hairdressersRouter.post("/login", loginHairdresserController);

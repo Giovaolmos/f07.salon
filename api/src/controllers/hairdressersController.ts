@@ -1,6 +1,10 @@
+import { Credential } from "../entities/Credential";
+import { Hairdresser } from "../entities/Hairdressers";
+import { validateCredential } from "../services/credentialsServices/credentials";
 import {
   getAllHairdressersService,
   getHairdresserByIdService,
+  loginHairdresserService,
   registerHairdresserService,
 } from "../services/hairdressersServices/hairdressers";
 import { Request, Response } from "express";
@@ -46,5 +50,24 @@ export const registerHairdresserController = async (
     res.status(201).json(newHairdresser);
   } catch (error) {
     res.status(400).json(`Error creating hairdresser ${error}`);
+  }
+};
+
+export const loginHairdresserController = async (
+  req: Request,
+  res: Response,
+) => {
+  const { username, password } = req.body;
+  try {
+    const hairdresserLogin: Credential = await validateCredential({
+      username,
+      password,
+    });
+    const hairdresser: Hairdresser | null = await loginHairdresserService(
+      hairdresserLogin.id,
+    );
+    res.status(200).json({ login: true, hairdresser });
+  } catch (error) {
+    res.status(400).json(`Error trying to login ${error}`);
   }
 };

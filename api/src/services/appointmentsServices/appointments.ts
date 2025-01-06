@@ -1,11 +1,16 @@
-import { appointmentModel, userModel } from '../../config/typeorm';
-import { appointmentDto } from '../../dtos/appointmentDto';
-import { Appointment } from '../../entities/Appointment';
-import { User } from '../../entities/User';
+import {
+  appointmentModel,
+  hairdresserModel,
+  userModel,
+} from "../../config/typeorm";
+import { appointmentDto } from "../../dtos/appointmentDto";
+import { Appointment } from "../../entities/Appointment";
+import { Hairdresser } from "../../entities/Hairdressers";
+import { User } from "../../entities/User";
 
 export const getAllAppointmentsService = async (): Promise<Appointment[]> => {
   const appointments: Appointment[] = await appointmentModel.find();
-  if (appointments.length === 0) throw new Error('There are no appointments');
+  if (appointments.length === 0) throw new Error("There are no appointments");
   else return appointments;
 };
 
@@ -14,7 +19,7 @@ export const getAppointmentByIdService = async (
 ): Promise<Appointment | null> => {
   const appointment = await appointmentModel.findOne({
     where: { id },
-    relations: { user: true },
+    relations: { user: true, hairdresser: true },
   });
   return appointment;
 };
@@ -26,11 +31,19 @@ export const createAppointmentService = async (
     id: appointment.userId,
   });
   if (!user) {
-    throw new Error('userId not found');
+    throw new Error("userId not found");
+  }
+
+  const hairdresser: Hairdresser | null = await hairdresserModel.findOneBy({
+    id: appointment.hairdresserId,
+  });
+  if (!hairdresser) {
+    throw new Error("hairdresserId not found");
   }
 
   const newAppointment: Appointment = appointmentModel.create(appointment);
   newAppointment.user = user;
+  newAppointment.hairdresser = hairdresser;
   await appointmentModel.save(newAppointment);
 
   return newAppointment;
@@ -41,12 +54,12 @@ export const cancelAppointmentsService = async (
 ): Promise<Appointment> => {
   const appointment: Appointment | null = await appointmentModel.findOne({
     where: { id },
-    relations: ['user'],
+    relations: ["user", "hairdresser"],
   });
   if (!appointment) {
-    throw new Error('Appointment not found');
+    throw new Error("Appointment not found");
   }
-  appointment.status = 'Cancelled';
+  appointment.status = "Cancelled";
   await appointmentModel.save(appointment);
   return appointment;
 };

@@ -42,3 +42,12 @@ export const registerHairdresserService = async (
   const result = await hairdresserModel.save(newHairdresser);
   return result;
 };
+
+export const loginHairdresserService = async (
+  credentials: number,
+): Promise<Hairdresser | null> => {
+  const hairdresser = await hairdresserModel.findOneBy({
+    credentials: { id: credentials },
+  });
+  return hairdresser;
+};
