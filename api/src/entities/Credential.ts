@@ -21,6 +21,12 @@ export class Credential {
   @Column()
   password: string;
 
+  @Column({
+    type: "enum",
+    enum: ["user", "hairdresser"],
+  })
+  role: string;
+
   @OneToOne(() => User)
   user: User;
 

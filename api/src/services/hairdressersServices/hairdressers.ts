@@ -36,6 +36,7 @@ export const registerHairdresserService = async (
   const newCredential: Credential = await createCredentialService({
     username: hairdresserData.username,
     password: hairdresserData.password,
+    role: "hairdresser",
   });
 
   newHairdresser.credentials = newCredential;

@@ -62,6 +62,7 @@ export const loginHairdresserController = async (
     const hairdresserLogin: Credential = await validateCredential({
       username,
       password,
+      role: "hairdresser",
     });
     const hairdresser: Hairdresser | null = await loginHairdresserService(
       hairdresserLogin.id,

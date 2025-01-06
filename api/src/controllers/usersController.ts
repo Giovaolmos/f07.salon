@@ -57,6 +57,7 @@ export const loginUserController = async (req: Request, res: Response) => {
     const userLogin: Credential = await validateCredential({
       username,
       password,
+      role: "user",
     });
     const user: User | null = await loginUserService(userLogin.id);
     res.status(200).json({ login: true, user });

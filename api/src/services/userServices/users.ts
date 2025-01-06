@@ -40,6 +40,7 @@ export const registerUserService = async (userData: userDto) => {
   const newCredential: Credential = await createCredentialService({
     username: userData.username,
     password: userData.password,
+    role: "user",
   });
 
   newUser.credentials = newCredential;
