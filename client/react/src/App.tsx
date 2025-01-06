@@ -4,6 +4,8 @@ import { NavBar } from "./components/NavBar";
 import "./index.css";
 import Home from "./views/Home/Home";
 import Landing from "./views/Landing/Landing";
+import Login from "./views/Login/Login";
+import LoginHairdresser from "./views/LoginHairdresser/LoginHairdressers";
 
 function App() {
   const location = useLocation();
@@ -14,6 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
+        <Route path="iniciar-sesion" element={<Login />} />
+        <Route path="iniciar-sesion-barbero" element={<LoginHairdresser />} />
       </Routes>
     </div>
   );
