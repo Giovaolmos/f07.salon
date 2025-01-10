@@ -1,9 +1,50 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../helpers/users/LoginUser";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    Swal.fire({
+      title: "Iniciando sesión...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    try {
+      const response = await loginUser({ username, password });
+      if (response.login) {
+        localStorage.setItem("userData", JSON.stringify(response.user));
+
+        await Swal.fire({
+          icon: "success",
+          title: "¡Bienvenido!",
+          text: `Hola ${response.user.name}`,
+          timer: 2000,
+          showConfirmButton: false,
+        });
+
+        navigate("/home");
+      }
+      Swal.close();
+    } catch (error) {
+      await Swal.fire({
+        icon: "error",
+        title: "Error",
+        text:
+          error instanceof Error ? error.message : "Error al iniciar sesión",
+        confirmButtonColor: "#3085d6",
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen  flex items-center justify-center w-full">
@@ -12,7 +53,7 @@ const Login = () => {
           INICIO DE SESIÓN CLIENTES
         </h1>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               htmlFor="username"
@@ -23,6 +64,8 @@ const Login = () => {
             <input
               type="text"
               id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-100 focus:outline-none"
               placeholder="Ingresa tu nombre de usuario"
               required
@@ -38,7 +81,9 @@ const Login = () => {
             <input
               type="password"
               id="password"
-              className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-100 focus:outline-none "
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-100 focus:outline-none"
               placeholder="Ingresa tu contraseña"
               required
             />

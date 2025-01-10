@@ -14,7 +14,7 @@ export const getAllUsersController = async (req: Request, res: Response) => {
     const users: User[] | null = await getAllUsersService();
     res.status(200).json(users);
   } catch (error) {
-    res.status(400).json(`Error getting users. ${error}`);
+    res.status(400).json(`Error al obtener los usuarios ${error}`);
   }
 };
 
@@ -24,7 +24,7 @@ export const getUserByIdController = async (req: Request, res: Response) => {
     const user: User | null = await getUserByIdService(Number(id));
     res.status(200).json(user);
   } catch (error) {
-    res.status(404).json(`ID  not found ${error}`);
+    res.status(404).json(`ID no encontrado ${error}`);
   }
 };
 
@@ -42,8 +42,7 @@ export const registerUserController = async (req: Request, res: Response) => {
     res.status(201).json(newUser);
   } catch (error: any) {
     if (
-      error.message ===
-      "This email is already registered to an existing account"
+      error.message === "Este email ya está registrado a una cuenta existente"
     ) {
       return res.status(409).json({ error: error.message });
     }
@@ -62,6 +61,6 @@ export const loginUserController = async (req: Request, res: Response) => {
     const user: User | null = await loginUserService(userLogin.id);
     res.status(200).json({ login: true, user });
   } catch (error) {
-    res.status(400).json(`Error trying to login ${error}`);
+    res.status(400).json(`Error al iniciar sesión ${error}`);
   }
 };
