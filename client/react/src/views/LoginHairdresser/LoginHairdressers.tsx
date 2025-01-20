@@ -1,10 +1,4 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
 const LoginHairdresser = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
   return (
     <div className="min-h-screen  flex items-center justify-center w-full">
       <div className="bg-yellow-800/90 shadow-md rounded-lg px-8 py-6 max-w-md">
