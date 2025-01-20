@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../helpers/users/LoginUser";
+
 import Swal from "sweetalert2";
+import { useUserAuth } from "../../helpers/Context/UserContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { handleLogin, isUserAuthenticated } = useUserAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (isUserAuthenticated) {
+      navigate("/home");
+    }
+  }, [isUserAuthenticated, navigate]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,10 +28,8 @@ const Login = () => {
     });
 
     try {
-      const response = await loginUser({ username, password });
-      if (response.login) {
-        localStorage.setItem("userData", JSON.stringify(response.user));
-
+      const response = await handleLogin(username, password);
+      if (response.login && response.login === true) {
         await Swal.fire({
           icon: "success",
           title: "¡Bienvenido!",

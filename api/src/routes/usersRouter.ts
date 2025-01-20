@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { getAllUsersController, getUserByIdController, loginUserController, registerUserController } from "../controllers/usersController";
+import {
+  getAllUsersController,
+  getAppointmentsByUserIdController,
+  getUserByIdController,
+  loginUserController,
+  registerUserController,
+} from "../controllers/usersController";
 import { registerUserMiddleware } from "../middlewares/registerUser";
 import { loginMiddleware } from "../middlewares/loginUser";
 
@@ -9,6 +15,8 @@ usersRouter.get("/", getAllUsersController);
 
 usersRouter.get("/:id", getUserByIdController);
 
-usersRouter.post("/register",registerUserMiddleware, registerUserController);
+usersRouter.get("/appointments/:id", getAppointmentsByUserIdController);
+
+usersRouter.post("/register", registerUserMiddleware, registerUserController);
 
 usersRouter.post("/login", loginMiddleware, loginUserController);

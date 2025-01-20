@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllHairdressers } from "../../helpers/hairdressers/getAllHairdressers";
-import { IHairdresser } from "../../interfaces/IHairdressers";
+import { IHairdresser } from "../../interfaces/Hairdresser/Hairdresser";
 
 const Home = () => {
   const [hairdressers, setHairdressers] = useState<IHairdresser[]>([]);

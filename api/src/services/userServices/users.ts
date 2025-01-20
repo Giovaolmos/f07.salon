@@ -1,9 +1,10 @@
 import { FindOneOptions } from "typeorm";
-import { userModel } from "../../config/typeorm";
+import { appointmentModel, userModel } from "../../config/typeorm";
 import { User } from "../../entities/User";
 import { createCredentialService } from "../credentialsServices/credentials";
 import { userDto } from "../../dtos/userDto";
 import { Credential } from "../../entities/Credential";
+import { Appointment } from "../../entities/Appointment";
 
 export const getAllUsersService = async (): Promise<User[]> => {
   const users: User[] = await userModel.find({
@@ -24,6 +25,18 @@ export const getUserByIdService = async (id: number): Promise<User | null> => {
   else {
     throw new Error("This ID doesn't belong to a user");
   }
+};
+
+export const getAppointmentsByUserIdService = async (
+  id: number,
+): Promise<Appointment[]> => {
+  const appointments: Appointment[] = await appointmentModel.find({
+    where: { user: { id } },
+    relations: ["hairdresser", "user"],
+  });
+  if (appointments.length === 0)
+    throw new Error("This user doesn't have any appointments");
+  return appointments;
 };
 
 export const registerUserService = async (userData: userDto) => {

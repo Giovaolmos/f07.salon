@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUserAuth } from "../../helpers/Context/UserContext";
 
 export const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { handleLogout, isUserAuthenticated } = useUserAuth();
+  const navigate = useNavigate();
+
+  const handleLogoutAndRedirect = () => {
+    handleLogout();
+    navigate("/iniciar-sesion");
+  };
 
   const renderNavItems = () => {
     return (
@@ -12,32 +20,50 @@ export const NavBar: React.FC = () => {
             Inicio
           </Link>
         </li>
-        <li>
-          <Link to="/historial" className="text-white hover:text-slate-300">
-            Historial
-          </Link>
-        </li>
-        <li>
-          <Link to="/nuevo-turno" className="text-white hover:text-slate-300">
-            Nuevo Turno
-          </Link>
-        </li>
-        <li className="lg:mb-0 mb-2">
-          <Link
-            to="/iniciar-sesion"
-            className="rounded-md bg-yellow-900 px-4 py-2 text-white transition hover:bg-yellow-800 inline-block"
-          >
-            Iniciar Sesión
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/registrar"
+        {isUserAuthenticated && (
+          <>
+            <li>
+              <Link to="/historial" className="text-white hover:text-slate-300">
+                Historial
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/nuevo-turno"
+                className="text-white hover:text-slate-300"
+              >
+                Nuevo Turno
+              </Link>
+            </li>
+          </>
+        )}
+        {!isUserAuthenticated ? (
+          <>
+            <li className="lg:mb-0 mb-2">
+              <Link
+                to="/iniciar-sesion"
+                className="rounded-md bg-yellow-900 px-4 py-2 text-white transition hover:bg-yellow-800 inline-block"
+              >
+                Iniciar Sesión
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/registrar"
+                className="rounded-md px-4 py-2 text-white bg-yellow-900 hover:bg-yellow-800 inline-block"
+              >
+                Registrar
+              </Link>
+            </li>
+          </>
+        ) : (
+          <button
+            onClick={handleLogoutAndRedirect}
             className="rounded-md px-4 py-2 text-white bg-yellow-900 hover:bg-yellow-800 inline-block"
           >
-            Registrar
-          </Link>
-        </li>
+            Cerrar Sesión
+          </button>
+        )}
       </>
     );
   };

@@ -4,10 +4,12 @@ import {
   getAllUsersService,
   getUserByIdService,
   loginUserService,
+  getAppointmentsByUserIdService,
 } from "../services/userServices/users";
 import { User } from "../entities/User";
 import { Credential } from "../entities/Credential";
 import { validateCredential } from "../services/credentialsServices/credentials";
+import { Appointment } from "../entities/Appointment";
 
 export const getAllUsersController = async (req: Request, res: Response) => {
   try {
@@ -25,6 +27,25 @@ export const getUserByIdController = async (req: Request, res: Response) => {
     res.status(200).json(user);
   } catch (error) {
     res.status(404).json(`ID no encontrado ${error}`);
+  }
+};
+
+export const getAppointmentsByUserIdController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const { id } = req.params;
+    const appointments: Appointment[] = await getAppointmentsByUserIdService(
+      Number(id),
+    );
+    res.status(200).json(appointments);
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(404).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: "Error interno del servidor" });
+    }
   }
 };
 
