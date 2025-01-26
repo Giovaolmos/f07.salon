@@ -43,42 +43,116 @@ const History = () => {
           No tienes citas registradas
         </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {appointments.map((appointment) => (
-            <div
-              key={appointment.id}
-              className="bg-yellow-800/60 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
-            >
-              <div className="p-6">
-                <div className="flex flex-col items-center mb-6">
+        <div>
+          {/* Vista de escritorio */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="min-w-full bg-yellow-800/60 rounded-lg overflow-hidden">
+              <thead>
+                <tr className="border-b border-yellow-700">
+                  <th className="px-6 py-4 text-left text-white font-semibold">
+                    Peluquero
+                  </th>
+                  <th className="px-6 py-4 text-left text-white font-semibold">
+                    Fecha
+                  </th>
+                  <th className="px-6 py-4 text-left text-white font-semibold">
+                    Hora
+                  </th>
+                  <th className="px-6 py-4 text-left text-white font-semibold">
+                    Servicio
+                  </th>
+                  <th className="px-6 py-4 text-left text-white font-semibold">
+                    Estado
+                  </th>
+                  <th className="px-6 py-4 text-left text-white font-semibold">
+                    Precio
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {appointments.map((appointment) => (
+                  <tr
+                    key={appointment.id}
+                    className="border-b border-yellow-700/50 hover:bg-yellow-700/50 transition-colors"
+                  >
+                    <td className="px-6 py-4">
+                      <div className="flex items-center space-x-3">
+                        <img
+                          src={appointment.hairdresser.img}
+                          alt={appointment.hairdresser.name}
+                          className="w-10 h-10 rounded-full object-cover"
+                        />
+                        <span className="text-white">
+                          {appointment.hairdresser.name}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-white">
+                      {new Date(appointment.date).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4 text-white">{appointment.time}</td>
+                    <td className="px-6 py-4 text-white">
+                      {appointment.description}
+                    </td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm ${
+                          appointment.status === "Active"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-gray-100 text-gray-800"
+                        }`}
+                      >
+                        {appointment.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className="text-green-400 font-semibold">
+                        ${appointment.hairdresser.price}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Vista móvil */}
+          <div className="md:hidden space-y-4">
+            {appointments.map((appointment) => (
+              <div
+                key={appointment.id}
+                className="bg-yellow-800/60 rounded-lg p-4 space-y-3"
+              >
+                <div className="flex items-center space-x-3">
                   <img
                     src={appointment.hairdresser.img}
                     alt={appointment.hairdresser.name}
-                    className="w-24 h-24 rounded-full object-cover border-4 border-gray-200"
+                    className="w-12 h-12 rounded-full object-cover"
                   />
-                  <h3 className="mt-4 text-xl font-semibold text-white">
+                  <span className="text-white font-semibold">
                     {appointment.hairdresser.name}
-                  </h3>
+                  </span>
                 </div>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between text-white">
-                    <span className="font-medium">Fecha:</span>
-                    <span>
+
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div>
+                    <p className="text-yellow-200">Fecha:</p>
+                    <p className="text-white">
                       {new Date(appointment.date).toLocaleDateString()}
-                    </span>
+                    </p>
                   </div>
-                  <div className="flex items-center justify-between text-white">
-                    <span className="font-medium">Hora:</span>
-                    <span>{appointment.time}</span>
+                  <div>
+                    <p className="text-yellow-200">Hora:</p>
+                    <p className="text-white">{appointment.time}</p>
                   </div>
-                  <div className="flex items-center justify-between text-white">
-                    <span className="font-medium">Servicio:</span>
-                    <span>{appointment.description}</span>
+                  <div>
+                    <p className="text-yellow-200">Servicio:</p>
+                    <p className="text-white">{appointment.description}</p>
                   </div>
-                  <div className="flex items-center justify-between text-white">
-                    <span className="font-medium">Estado:</span>
+                  <div>
+                    <p className="text-yellow-200">Estado:</p>
                     <span
-                      className={`px-3 py-1 rounded-full text-sm ${
+                      className={`inline-block px-2 py-1 rounded-full text-xs ${
                         appointment.status === "Active"
                           ? "bg-green-100 text-green-800"
                           : "bg-gray-100 text-gray-800"
@@ -87,16 +161,16 @@ const History = () => {
                       {appointment.status}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between text-white">
-                    <span className="font-medium">Precio:</span>
-                    <span className="text-lg font-semibold text-green-400">
+                  <div>
+                    <p className="text-yellow-200">Precio:</p>
+                    <span className="text-green-400 font-semibold">
                       ${appointment.hairdresser.price}
                     </span>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </div>

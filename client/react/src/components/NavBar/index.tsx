@@ -29,10 +29,10 @@ export const NavBar: React.FC = () => {
             </li>
             <li>
               <Link
-                to="/nuevo-turno"
+                to="/reservar-turno"
                 className="text-white hover:text-slate-300"
               >
-                Nuevo Turno
+                Reservar Turno
               </Link>
             </li>
           </>
