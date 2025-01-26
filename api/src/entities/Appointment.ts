@@ -22,7 +22,7 @@ export class Appointment {
   @Column()
   time: string;
 
-  @Column({ default: "Active" })
+  @Column({ default: "Activo" })
   status: string;
 
   @ManyToOne(() => User, (user) => user.appointments)

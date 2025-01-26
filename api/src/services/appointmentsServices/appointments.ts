@@ -59,7 +59,7 @@ export const cancelAppointmentsService = async (
   if (!appointment) {
     throw new Error("Appointment not found");
   }
-  appointment.status = "Cancelled";
+  appointment.status = "Cancelado";
   await appointmentModel.save(appointment);
   return appointment;
 };
