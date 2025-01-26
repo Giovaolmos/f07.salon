@@ -49,22 +49,22 @@ const History = () => {
             <table className="min-w-full bg-yellow-800/60 rounded-lg overflow-hidden">
               <thead>
                 <tr className="border-b border-yellow-700">
-                  <th className="px-6 py-4 text-left text-white font-semibold">
+                  <th className="px-6 py-4 text-left text-yellow-200 font-semibold">
                     Peluquero
                   </th>
-                  <th className="px-6 py-4 text-left text-white font-semibold">
+                  <th className="px-6 py-4 text-left text-yellow-200 font-semibold">
                     Fecha
                   </th>
-                  <th className="px-6 py-4 text-left text-white font-semibold">
+                  <th className="px-6 py-4 text-left text-yellow-200 font-semibold">
                     Hora
                   </th>
-                  <th className="px-6 py-4 text-left text-white font-semibold">
+                  <th className="px-6 py-4 text-left text-yellow-200 font-semibold">
                     Servicio
                   </th>
-                  <th className="px-6 py-4 text-left text-white font-semibold">
+                  <th className="px-6 py-4 text-left text-yellow-200 font-semibold">
                     Estado
                   </th>
-                  <th className="px-6 py-4 text-left text-white font-semibold">
+                  <th className="px-6 py-4 text-left text-yellow-200 font-semibold">
                     Precio
                   </th>
                 </tr>
@@ -80,9 +80,9 @@ const History = () => {
                         <img
                           src={appointment.hairdresser.img}
                           alt={appointment.hairdresser.name}
-                          className="w-10 h-10 rounded-full object-cover"
+                          className="w-12 h-12 rounded-full object-cover"
                         />
-                        <span className="text-white">
+                        <span className="text-white font-semibold">
                           {appointment.hairdresser.name}
                         </span>
                       </div>
@@ -96,7 +96,7 @@ const History = () => {
                     </td>
                     <td className="px-6 py-4">
                       <span
-                        className={`px-3 py-1 rounded-full text-sm ${
+                        className={`inline-block px-2 py-1 rounded-full text-xs ${
                           appointment.status === "Active"
                             ? "bg-green-100 text-green-800"
                             : "bg-gray-100 text-gray-800"
