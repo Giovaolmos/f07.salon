@@ -1,5 +1,5 @@
 export interface ICreateAppointment {
-  date: Date;
+  date: string;
   time: string;
   description: string;
   userId: number;

@@ -11,6 +11,10 @@ import Swal from "sweetalert2";
 export const NewAppointment = () => {
   const navigate = useNavigate();
 
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 14);
+
   const [appointmentData, setAppointmentData] = useState<ICreateAppointment>(
     () => {
       const userFromStorage = JSON.parse(
@@ -18,7 +22,7 @@ export const NewAppointment = () => {
       ) as User;
 
       return {
-        date: new Date(),
+        date: today.toISOString().split("T")[0],
         time: "",
         description: "",
         userId: Number(userFromStorage.id),
@@ -43,6 +47,7 @@ export const NewAppointment = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     try {
       await createAppointment(appointmentData);
       Swal.fire({
@@ -57,7 +62,10 @@ export const NewAppointment = () => {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Hubo un problema al crear el turno. Por favor, intenta nuevamente.",
+        text:
+          error instanceof Error
+            ? error.message
+            : "Hubo un problema al crear el turno. Por favor, intenta nuevamente.",
         confirmButtonColor: "#d97706",
       });
       console.error("Error al crear el turno:", error);
@@ -79,6 +87,12 @@ export const NewAppointment = () => {
       });
     }
   };
+
+  const horasDisponibles = [];
+  for (let hora = 9; hora <= 20; hora++) {
+    horasDisponibles.push(`${hora.toString().padStart(2, "0")}:00`);
+    horasDisponibles.push(`${hora.toString().padStart(2, "0")}:30`);
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center w-full">
@@ -122,8 +136,10 @@ export const NewAppointment = () => {
               type="date"
               id="date"
               name="date"
-              value={appointmentData.date.toISOString().split("T")[0]}
+              value={appointmentData.date}
               onChange={handleInputChange}
+              min={today.toISOString().split("T")[0]}
+              max={maxDate.toISOString().split("T")[0]}
               className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-100 focus:outline-none"
               required
             />
@@ -136,15 +152,22 @@ export const NewAppointment = () => {
             >
               Hora
             </label>
-            <input
-              type="time"
+            <select
               id="time"
               name="time"
               value={appointmentData.time}
               onChange={handleInputChange}
-              className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-100 focus:outline-none"
+              className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-100 focus:outline-none max-h-32 overflow-y-auto"
+              size={5}
               required
-            />
+            >
+              <option value="">Selecciona una hora</option>
+              {horasDisponibles.map((hora) => (
+                <option key={hora} value={hora}>
+                  {hora}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="mb-4">

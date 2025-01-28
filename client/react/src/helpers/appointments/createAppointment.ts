@@ -16,6 +16,6 @@ export const createAppointment = async (
     if (axios.isAxiosError(error)) {
       throw new Error(error.response?.data || "Error al crear el turno");
     }
-    throw new Error("Error inesperado al crear el turno");
+    throw error;
   }
 };
