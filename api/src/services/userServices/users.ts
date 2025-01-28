@@ -35,7 +35,7 @@ export const getAppointmentsByUserIdService = async (
     relations: ["hairdresser", "user"],
   });
   if (appointments.length === 0)
-    throw new Error("This user doesn't have any appointments");
+    throw new Error("No posees citas hasta el momento");
   return appointments;
 };
 

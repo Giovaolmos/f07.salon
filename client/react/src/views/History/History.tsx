@@ -59,6 +59,7 @@ const History = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
+        setLoading(true);
         const userData = localStorage.getItem("userData");
         if (!userData) {
           throw new Error("No se encontró información del usuario");
@@ -79,8 +80,59 @@ const History = () => {
     fetchAppointments();
   }, []);
 
-  if (loading) return <div>Cargando...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-yellow-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center px-4">
+        <div className="bg-gradient-to-br from-yellow-900/80 to-yellow-800/60 rounded-xl p-6 max-w-lg w-full shadow-xl backdrop-blur-sm">
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="rounded-full bg-yellow-800/60 p-3">
+              <svg
+                className="w-8 h-8 text-yellow-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-white">{error}</h3>
+            <button
+              onClick={() => (window.location.href = "/reservar-turno")}
+              className="mt-4 px-6 py-2 bg-yellow-600 hover:bg-yellow-500 text-white rounded-lg transition-colors duration-200 ease-in-out flex items-center gap-2"
+            >
+              <span>Reservar una cita</span>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -88,9 +140,13 @@ const History = () => {
         HISTORIAL DE CITAS
       </h1>
       {appointments.length === 0 ? (
-        <p className="text-center text-white text-lg">
-          No tienes citas registradas
-        </p>
+        <div className="text-center bg-yellow-800/60 rounded-lg p-8 max-w-md mx-auto">
+          <p className="text-white text-xl mb-2">No tienes citas programadas</p>
+          <p className="text-yellow-200 text-md">
+            ¡Programa tu primera cita con nosotros y comienza a disfrutar de
+            nuestros servicios!
+          </p>
+        </div>
       ) : (
         <div>
           {/* Vista de escritorio */}

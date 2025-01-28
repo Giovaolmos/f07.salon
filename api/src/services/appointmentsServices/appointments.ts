@@ -10,7 +10,7 @@ import { User } from "../../entities/User";
 
 export const getAllAppointmentsService = async (): Promise<Appointment[]> => {
   const appointments: Appointment[] = await appointmentModel.find();
-  if (appointments.length === 0) throw new Error("There are no appointments");
+  if (appointments.length === 0) throw new Error("No se encontraron citas");
   else return appointments;
 };
 
@@ -31,14 +31,14 @@ export const createAppointmentService = async (
     id: appointment.userId,
   });
   if (!user) {
-    throw new Error("userId not found");
+    throw new Error("El ID del usuario no se encontró");
   }
 
   const hairdresser: Hairdresser | null = await hairdresserModel.findOneBy({
     id: appointment.hairdresserId,
   });
   if (!hairdresser) {
-    throw new Error("hairdresserId not found");
+    throw new Error("El ID del barbero no se encontró");
   }
 
   const existingAppointment = await appointmentModel.findOne({
@@ -72,7 +72,7 @@ export const cancelAppointmentsService = async (
     relations: ["user", "hairdresser"],
   });
   if (!appointment) {
-    throw new Error("Appointment not found");
+    throw new Error("La cita no se encontró");
   }
   appointment.status = "Cancelado";
   await appointmentModel.save(appointment);

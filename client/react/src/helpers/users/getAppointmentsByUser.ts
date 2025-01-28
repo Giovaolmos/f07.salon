@@ -8,9 +8,9 @@ export const getAppointmentsByUser = async (id: number) => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(
-        error.response?.data || "Error during the appointment search",
+        error.response?.data?.message || "Error al buscar las citas",
       );
     }
-    throw new Error("Unexpected error during the appointment search");
+    throw new Error("Error inesperado al buscar las citas");
   }
 };

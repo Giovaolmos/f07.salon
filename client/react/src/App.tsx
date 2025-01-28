@@ -8,6 +8,7 @@ import Login from "./views/Login/Login";
 import LoginHairdresser from "./views/LoginHairdresser/LoginHairdressers";
 import History from "./views/History/History";
 import { NewAppointment } from "./views/NewAppointment/NewAppointment";
+import RegisterUser from "./views/ResgisterUser/RegisterUser";
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="iniciar-sesion" element={<Login />} />
         <Route path="iniciar-sesion-barbero" element={<LoginHairdresser />} />
+        <Route path="registrar" element={<RegisterUser />} />
         <Route path="/historial" element={<History />} />
         <Route path="/reservar-turno" element={<NewAppointment />} />
       </Routes>

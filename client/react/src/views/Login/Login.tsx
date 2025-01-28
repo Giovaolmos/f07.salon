@@ -96,7 +96,7 @@ const Login = () => {
           </div>
           <div className="flex items-center justify-between mb-4">
             <a
-              href="/register"
+              href="/registrar"
               className="text-xs text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Crear cuenta
