@@ -1,9 +1,14 @@
 import { FindOneOptions } from "typeorm";
-import { hairdresserModel, userModel } from "../../config/typeorm";
+import {
+  appointmentModel,
+  hairdresserModel,
+  userModel,
+} from "../../config/typeorm";
 import { Hairdresser } from "../../entities/Hairdressers";
 import { hairdresserDto } from "../../dtos/hairdressers.Dto";
 import { Credential } from "../../entities/Credential";
 import { createCredentialService } from "../credentialsServices/credentials";
+import { Appointment } from "../../entities/Appointment";
 
 export const getAllHairdressersService = async (): Promise<Hairdresser[]> => {
   const hairdressers: Hairdresser[] = await hairdresserModel.find({
@@ -26,6 +31,18 @@ export const getHairdresserByIdService = async (
   else {
     throw new Error("This ID doesn't belong to a hairdresser");
   }
+};
+
+export const getAppointmentsByHairdresserIdService = async (
+  id: number,
+): Promise<Appointment[]> => {
+  const appointments: Appointment[] = await appointmentModel.find({
+    where: { hairdresser: { id } },
+    relations: ["hairdresser", "user"],
+  });
+  if (appointments.length === 0)
+    throw new Error("No tienes citas hasta el momento");
+  return appointments;
 };
 
 export const registerHairdresserService = async (

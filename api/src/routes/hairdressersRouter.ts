@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   getAllHairdressersController,
+  getAppointmentsByHairdresserIdController,
   getHairdresserByIdController,
   loginHairdresserController,
   registerHairdresserController,
@@ -12,6 +13,11 @@ export const hairdressersRouter: Router = Router();
 hairdressersRouter.get("/", getAllHairdressersController);
 
 hairdressersRouter.get("/:id", getHairdresserByIdController);
+
+hairdressersRouter.get(
+  "/appointments/:id",
+  getAppointmentsByHairdresserIdController,
+);
 
 hairdressersRouter.post(
   "/register",
