@@ -1,11 +1,60 @@
 import { useEffect, useState } from "react";
 import { getAppointmentsByUser } from "../../helpers/users/getAppointmentsByUser";
 import { Appointment } from "../../interfaces/Appointment/Appointment";
+import { cancelAppointment } from "../../helpers/appointments/cancelAppointment";
+import Swal from "sweetalert2";
 
 const History = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(true);
+
+  const handleCancelAppointment = async (appointmentId: string) => {
+    try {
+      // Diálogo de confirmación
+      const result = await Swal.fire({
+        title: "¿Estás seguro?",
+        text: "No podrás revertir esta acción",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#22c55e",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, cancelar cita",
+        cancelButtonText: "No, mantener cita",
+      });
+
+      // Solo proceder si el usuario confirmó
+      if (result.isConfirmed) {
+        await cancelAppointment(appointmentId);
+        const userData = localStorage.getItem("userData");
+        if (!userData)
+          throw new Error("No se encontró información del usuario");
+        const { id } = JSON.parse(userData);
+        const updatedAppointments = await getAppointmentsByUser(id);
+        setAppointments(updatedAppointments);
+
+        // Alerta de éxito
+        await Swal.fire({
+          icon: "success",
+          title: "¡Cita cancelada!",
+          text: "La cita ha sido cancelada exitosamente",
+          confirmButtonColor: "#22c55e",
+        });
+      }
+    } catch (error) {
+      // Alerta de error
+      await Swal.fire({
+        icon: "error",
+        title: "Error",
+        text:
+          error instanceof Error ? error.message : "Error al cancelar la cita",
+        confirmButtonColor: "#d33",
+      });
+      setError(
+        error instanceof Error ? error.message : "Error al cancelar la cita",
+      );
+    }
+  };
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -50,7 +99,7 @@ const History = () => {
               <thead>
                 <tr className="border-b border-yellow-700">
                   <th className="px-6 py-4 text-left text-yellow-200 font-semibold">
-                    Peluquero
+                    Barbero
                   </th>
                   <th className="px-6 py-4 text-left text-yellow-200 font-semibold">
                     Fecha
@@ -66,6 +115,9 @@ const History = () => {
                   </th>
                   <th className="px-6 py-4 text-left text-yellow-200 font-semibold">
                     Precio
+                  </th>
+                  <th className="px-6 py-4 text-left text-yellow-200 font-semibold">
+                    Acciones
                   </th>
                 </tr>
               </thead>
@@ -97,8 +149,8 @@ const History = () => {
                     <td className="px-6 py-4">
                       <span
                         className={`inline-block px-2 py-1 rounded-full text-xs ${
-                          appointment.status === "Active"
-                            ? "bg-green-100 text-green-800"
+                          appointment.status === "Activo"
+                            ? "bg-green-200 text-green-800"
                             : "bg-gray-100 text-gray-800"
                         }`}
                       >
@@ -109,6 +161,18 @@ const History = () => {
                       <span className="text-green-400 font-semibold">
                         ${appointment.hairdresser.price}
                       </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      {appointment.status === "Activo" && (
+                        <button
+                          onClick={() =>
+                            handleCancelAppointment(appointment.id)
+                          }
+                          className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm transition-colors"
+                        >
+                          Cancelar
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -153,8 +217,8 @@ const History = () => {
                     <p className="text-yellow-200">Estado:</p>
                     <span
                       className={`inline-block px-2 py-1 rounded-full text-xs ${
-                        appointment.status === "Active"
-                          ? "bg-green-100 text-green-800"
+                        appointment.status === "Activo"
+                          ? "bg-green-200 text-green-800"
                           : "bg-gray-100 text-gray-800"
                       }`}
                     >
@@ -167,6 +231,17 @@ const History = () => {
                       ${appointment.hairdresser.price}
                     </span>
                   </div>
+                </div>
+
+                <div className="mt-2">
+                  {appointment.status === "Activo" && (
+                    <button
+                      onClick={() => handleCancelAppointment(appointment.id)}
+                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm transition-colors w-full"
+                    >
+                      Cancelar
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
