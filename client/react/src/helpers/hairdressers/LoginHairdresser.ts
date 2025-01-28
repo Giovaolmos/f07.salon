@@ -1,7 +1,6 @@
 import axios from "axios";
 import { ILoginHairdresser } from "../../interfaces/Hairdresser/ILoginHairdresser";
-
-export const URL_BACKEND_HAIRDRESSERS = "http://localhost:3000/hairdressers";
+import { URL_BACKEND_HAIRDRESSERS } from "./getAllHairdressers";
 
 export const loginHairdresser = async (hairdresser: ILoginHairdresser) => {
   try {

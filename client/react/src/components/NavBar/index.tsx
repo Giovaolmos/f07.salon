@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../helpers/Context/UserContext";
 import { useHairdresserAuth } from "../../helpers/Context/HairdresserContext";
+import Swal from "sweetalert2";
 
 export const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,13 +11,36 @@ export const NavBar: React.FC = () => {
     useHairdresserAuth();
   const navigate = useNavigate();
 
-  const handleLogoutAndRedirect = () => {
-    if (isHairdresserAuthenticated) {
-      handleHairdresserLogout();
-    } else {
-      handleUserLogout();
+  const handleLogoutAndRedirect = async () => {
+    const result = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¿Deseas cerrar la sesión?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#22c55e", // Cambiado a verde
+      cancelButtonColor: "#d33", // Cambiado a rojo
+      confirmButtonText: "Sí, cerrar sesión",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (result.isConfirmed) {
+      if (isHairdresserAuthenticated) {
+        handleHairdresserLogout();
+        navigate("/iniciar-sesion-barbero");
+      } else {
+        handleUserLogout();
+        navigate("/iniciar-sesion");
+      }
+
+      Swal.fire({
+        title: "¡Sesión cerrada!",
+        text: "Has cerrado sesión exitosamente",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+        confirmButtonColor: "#22c55e", // Añadido para consistencia
+      });
     }
-    navigate("/iniciar-sesion");
   };
 
   const renderNavItems = () => {

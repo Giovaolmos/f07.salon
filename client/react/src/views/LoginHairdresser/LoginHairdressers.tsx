@@ -37,7 +37,7 @@ const LoginHairdresser = () => {
           showConfirmButton: false,
         });
 
-        navigate("/hairdresser/home");
+        navigate("/home-barbero");
       }
     } catch (error) {
       await Swal.fire({
