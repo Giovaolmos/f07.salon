@@ -1,18 +1,38 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../helpers/Context/UserContext";
+import { useHairdresserAuth } from "../../helpers/Context/HairdresserContext";
 
 export const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { handleLogout, isUserAuthenticated } = useUserAuth();
+  const { handleLogout: handleUserLogout, isUserAuthenticated } = useUserAuth();
+  const { handleLogout: handleHairdresserLogout, isHairdresserAuthenticated } =
+    useHairdresserAuth();
   const navigate = useNavigate();
 
   const handleLogoutAndRedirect = () => {
-    handleLogout();
+    if (isHairdresserAuthenticated) {
+      handleHairdresserLogout();
+    } else {
+      handleUserLogout();
+    }
     navigate("/iniciar-sesion");
   };
 
   const renderNavItems = () => {
+    if (isHairdresserAuthenticated) {
+      return (
+        <li>
+          <button
+            onClick={handleLogoutAndRedirect}
+            className="rounded-md px-4 py-2 text-white bg-yellow-900 hover:bg-yellow-800 inline-block"
+          >
+            Cerrar Sesión
+          </button>
+        </li>
+      );
+    }
+
     return (
       <>
         <li>
@@ -72,7 +92,7 @@ export const NavBar: React.FC = () => {
     <div>
       <header className="top-0 w-full bg-opacity-90 z-50 h-16">
         <nav className="flex items-center p-4">
-          <img className="rounded-full size-12" src="logo.jpeg" alt="logo" />
+          <img className="rounded-full size-12" src="/logo.jpeg" alt="logo" />
           <div className="hidden lg:flex ml-auto">
             <ul className="flex gap-4 items-center cursor-pointer">
               {renderNavItems()}

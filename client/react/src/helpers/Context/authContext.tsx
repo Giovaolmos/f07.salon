@@ -57,20 +57,35 @@ export const HairdresserAuthProvider = ({
   const [isHairdresserAuthenticated, setIsHairdresserAuthenticated] =
     useState(false);
 
-  const handleLogin = async (username: string, password: string) => {
-    try {
-      const hairdresserData = await loginHairdresser({ username, password });
+  useEffect(() => {
+    const storedHairdresser = localStorage.getItem("hairdresserData");
+    if (storedHairdresser) {
+      const hairdresserData = JSON.parse(storedHairdresser);
       setHairdresser(hairdresserData);
       setIsHairdresserAuthenticated(true);
-      return hairdresserData;
+    }
+  }, []);
+
+  const handleLogin = async (username: string, password: string) => {
+    try {
+      const response = await loginHairdresser({ username, password });
+      setHairdresser(response.hairdresser);
+      setIsHairdresserAuthenticated(true);
+      localStorage.setItem(
+        "hairdresserData",
+        JSON.stringify(response.hairdresser),
+      );
+      return response;
     } catch (error) {
       setHairdresser(null);
       setIsHairdresserAuthenticated(false);
+      localStorage.removeItem("hairdresserData");
       throw error;
     }
   };
 
   const handleLogout = () => {
+    localStorage.removeItem("hairdresserData");
     setHairdresser(null);
     setIsHairdresserAuthenticated(false);
   };
