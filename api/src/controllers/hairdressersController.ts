@@ -69,6 +69,6 @@ export const loginHairdresserController = async (
     );
     res.status(200).json({ login: true, hairdresser });
   } catch (error) {
-    res.status(400).json(`Error trying to login ${error}`);
+    res.status(400).json(`${error}`);
   }
 };
