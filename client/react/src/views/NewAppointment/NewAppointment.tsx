@@ -96,9 +96,9 @@ export const NewAppointment = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center w-full">
-      <div className="bg-yellow-800/90 shadow-md rounded-lg px-8 py-6 max-w-md">
+      <div className="bg-gradient-to-br from-yellow-900/80 to-yellow-800/60 shadow-md rounded-lg px-8 py-6 max-w-md">
         <h1 className="text-2xl font-bold text-center mb-4 dark:text-gray-200">
-          NUEVO TURNO
+          RESERVAR CITA
         </h1>
 
         <form onSubmit={handleSubmit}>
@@ -196,7 +196,7 @@ export const NewAppointment = () => {
             type="submit"
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-500 hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Reservar Turno
+            Reservar Cita
           </button>
         </form>
       </div>

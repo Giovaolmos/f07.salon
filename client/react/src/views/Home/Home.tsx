@@ -21,7 +21,7 @@ const Home = () => {
         {hairdressers.map((hairdresser) => (
           <div
             key={hairdresser.id}
-            className="bg-yellow-800/60  rounded-lg shadow-md p-4 flex flex-col items-center transition-transform transform hover:scale-105"
+            className="bg-gradient-to-br from-yellow-900/100 to-yellow-800/70 rounded-lg shadow-md p-4 flex flex-col items-center transition-transform transform hover:scale-105"
           >
             <h3 className="text-lg font-semibold text-white mb-2">
               {hairdresser.name}
@@ -36,7 +36,7 @@ const Home = () => {
               to="/reservar-turno"
               className="mt-4 bg-amber-500 hover:bg-amber-400 text-white font-bold py-2 px-4 rounded"
             >
-              Sacar Turno
+              Reservar Cita
             </Link>
           </div>
         ))}

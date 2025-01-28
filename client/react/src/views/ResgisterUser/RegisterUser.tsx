@@ -62,7 +62,7 @@ const RegisterUser = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center w-full pt-10">
-      <div className="bg-yellow-800/90 shadow-md rounded-lg px-8 py-6 max-w-md">
+      <div className="bg-gradient-to-br from-yellow-900/80 to-yellow-800/60 rounded-xl p-6 max-w-lg w-full shadow-xl backdrop-blur-sm">
         <h1 className="text-2xl font-bold text-center mb-4 dark:text-gray-200">
           REGISTRO DE USUARIO
         </h1>

@@ -32,7 +32,7 @@ export const NavBar: React.FC = () => {
                 to="/reservar-turno"
                 className="text-white hover:text-slate-300"
               >
-                Reservar Turno
+                Reservar Cita
               </Link>
             </li>
           </>
