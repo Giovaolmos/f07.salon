@@ -49,7 +49,7 @@ export const postAppointmentController = async (
     });
     res.status(201).json(newAppointment);
   } catch (error) {
-    res.status(400).json(`Error creating appointment  ${error}`);
+    res.status(400).json(`Ocurrio un ${error}`);
   }
 };
 

@@ -41,6 +41,21 @@ export const createAppointmentService = async (
     throw new Error("hairdresserId not found");
   }
 
+  const existingAppointment = await appointmentModel.findOne({
+    where: {
+      hairdresser: { id: appointment.hairdresserId },
+      date: appointment.date,
+      time: appointment.time,
+      status: "Activo",
+    },
+  });
+
+  if (existingAppointment) {
+    throw new Error(
+      "Ya existe una cita activa para este barbero en la fecha y hora seleccionada",
+    );
+  }
+
   const newAppointment: Appointment = appointmentModel.create(appointment);
   newAppointment.user = user;
   newAppointment.hairdresser = hairdresser;
