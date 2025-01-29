@@ -59,11 +59,13 @@ export const NavBar: React.FC = () => {
 
     return (
       <>
-        <li>
-          <Link to="/home" className="text-white hover:text-slate-300">
-            Inicio
-          </Link>
-        </li>
+        {isUserAuthenticated && (
+          <li>
+            <Link to="/home" className="text-white hover:text-slate-300">
+              Inicio
+            </Link>
+          </li>
+        )}
         {isUserAuthenticated && (
           <>
             <li>
