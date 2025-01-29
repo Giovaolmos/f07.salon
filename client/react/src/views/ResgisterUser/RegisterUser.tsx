@@ -23,7 +23,7 @@ const RegisterUser = () => {
       await Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Las contraseñas no coinciden",
+        text: "La contraseña y la confirmación de contraseña no coinciden",
         confirmButtonColor: "#3085d6",
       });
       return;
