@@ -14,6 +14,7 @@ import RegisterUser from "./views/ResgisterUser/RegisterUser";
 import Home from "./views/Home/Home";
 import History from "./views/History/History";
 import HomeHairdresser from "./views/HomeHairdresser/HomeHairdresser";
+import NotFound from "./views/NotFound/NotFound";
 
 function App() {
   const location = useLocation();
@@ -39,6 +40,8 @@ function App() {
         <Route element={<ProtectedHairdresserRoute />}>
           <Route path="/home-barbero" element={<HomeHairdresser />} />
         </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
