@@ -17,8 +17,8 @@ export const NavBar: React.FC = () => {
       text: "¿Deseas cerrar la sesión?",
       icon: "question",
       showCancelButton: true,
-      confirmButtonColor: "#22c55e", // Cambiado a verde
-      cancelButtonColor: "#d33", // Cambiado a rojo
+      confirmButtonColor: "#22c55e",
+      cancelButtonColor: "#d33",
       confirmButtonText: "Sí, cerrar sesión",
       cancelButtonText: "Cancelar",
     });
@@ -38,7 +38,7 @@ export const NavBar: React.FC = () => {
         icon: "success",
         timer: 2000,
         showConfirmButton: false,
-        confirmButtonColor: "#22c55e", // Añadido para consistencia
+        confirmButtonColor: "#22c55e",
       });
     }
   };

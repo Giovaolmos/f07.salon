@@ -19,7 +19,7 @@ const LandingPage: React.FC = () => {
         <p className="text-base sm:text-lg md:text-xl mb-6">
           Descubre nuestros servicios
         </p>
-        <Link to="/home">
+        <Link to="/iniciar-sesion">
           <button className="px-6 py-3 text-lg font-semibold bg-yellow-900  text-white rounded-md hover:bg-yellow-800  transition duration-300">
             ¡Quiero mi turno!
           </button>
