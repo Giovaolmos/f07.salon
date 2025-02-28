@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ILoginUser } from "../../interfaces/User/ILoginUser";
 
-export const URL_BACKEND_USERS = "http://localhost:3000/users";
+export const URL_BACKEND_USERS = "http://192.168.1.37:3000/users";
 
 export const loginUser = async (user: ILoginUser) => {
   try {

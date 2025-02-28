@@ -5,7 +5,14 @@ import { indexRouter } from "./routes/indexRouter";
 
 export const server = express();
 
-server.use(cors());
+server.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 server.use(express.json());
-server.use(morgan("dev"))
-server.use(indexRouter)
+server.use(morgan("dev"));
+server.use(indexRouter);
