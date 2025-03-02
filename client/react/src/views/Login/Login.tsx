@@ -53,17 +53,17 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen  flex items-center justify-center w-full">
-      <div className="bg-gradient-to-br from-yellow-900/80 to-yellow-800/60 rounded-xl p-6 max-w-lg w-full shadow-xl backdrop-blur-sm">
-        <h1 className="text-2xl font-bold text-center mb-4 dark:text-gray-200">
-          INICIO DE SESIÓN CLIENTES
+    <div className="flex items-center justify-center w-full min-h-screen">
+      <div className="w-full max-w-lg p-6 shadow-xl bg-gradient-to-br from-yellow-900/80 to-yellow-800/60 rounded-xl backdrop-blur-sm">
+        <h1 className="mb-4 text-2xl font-bold text-center dark:text-gray-200">
+          INICIO DE SESIÓN CLIENTESS
         </h1>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               htmlFor="username"
-              className="block text-sm font-medium text-gray-500 dark:text-gray-100 mb-2"
+              className="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-100"
             >
               Nombre de usuario
             </label>
@@ -72,7 +72,7 @@ const Login = () => {
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-100 focus:outline-none"
+              className="w-full px-3 py-2 border border-gray-100 rounded-md shadow-sm focus:outline-none"
               placeholder="Ingresa tu nombre de usuario"
               required
             />
@@ -80,7 +80,7 @@ const Login = () => {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-500 dark:text-gray-100 mb-2"
+              className="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-100"
             >
               Contraseña
             </label>
@@ -89,7 +89,7 @@ const Login = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-100 focus:outline-none"
+              className="w-full px-3 py-2 border border-gray-100 rounded-md shadow-sm focus:outline-none"
               placeholder="Ingresa tu contraseña"
               required
             />
@@ -112,7 +112,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-500 hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-amber-500 hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Iniciar Sesión
           </button>
